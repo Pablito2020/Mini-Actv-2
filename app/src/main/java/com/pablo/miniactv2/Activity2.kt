@@ -11,10 +11,10 @@ class Activity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_2)
-        execute()
+        setUpComponents()
     }
 
-    private fun execute() {
+    private fun setUpComponents() {
         val result = getResultFromIntent()
         setUpButton(result)
         setUpTextView(result)
@@ -22,10 +22,8 @@ class Activity2 : AppCompatActivity() {
 
     private fun getResultFromIntent(): String {
         val number = intent.getIntExtra(NUMBER_KEY, DEFAULT_NUMBER)
-        var textValue = intent.getStringExtra(TEXT_KEY)
-        textValue = textValue!!.repeat(number)
-        textValue = textValue.take(MAX_LENGTH_RESULT)
-        return textValue
+        val textValue = intent.getStringExtra(TEXT_KEY)
+        return textValue!!.repeat(number)
     }
 
     private fun setUpButton(result: String) {
