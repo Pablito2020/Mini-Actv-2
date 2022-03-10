@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MiniActv2</string>
+    <string name="inputHint">Bye message</string>
+    <string name="introduce_message">Introduce Message:</string>
+    <string name="number_repetitions">Introduce number of repetitions:</string>
+    <string name="top_message">Hello World!</string>
+    <string name="goto_bye">Go to Bye Screen</string>
+</resources>
