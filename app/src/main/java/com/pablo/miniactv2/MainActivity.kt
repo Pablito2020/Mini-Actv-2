@@ -6,9 +6,18 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var messageTextView: TextView
+
+    val getContent = registerForActivityResult(StartActivityForResult()) {
+        if (it.resultCode == RESULT_OK) {
+            val message = it.data?.getStringExtra(RESULT)
+            messageTextView.text = message
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,21 +29,11 @@ class MainActivity : AppCompatActivity() {
 
         messageTextView = findViewById(R.id.message)
         gotoByeScreenButton.setOnClickListener{
-            val activity_2 = Intent(this, Activity2::class.java)
-            // Put extra String and ints
-            activity_2.putExtra("BYE_TEXT", textInputBye.getText().toString())
+            val activity2 = Intent(this, Activity2::class.java)
+            activity2.putExtra(TEXT, textInputBye.getText().toString())
             val number: Int = Integer.parseInt(numberInput.getText().toString())
-            activity_2.putExtra("NUMBER_BYE", number)
-            startActivityForResult(activity_2, 2)
+            activity2.putExtra(NUMBER, number)
+            getContent.launch(activity2)
         }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode ==  2 && resultCode == RESULT_OK && data != null) {
-            val message = data.getStringExtra("RESULT")
-            messageTextView.setText(message)
-        }
-
     }
 }

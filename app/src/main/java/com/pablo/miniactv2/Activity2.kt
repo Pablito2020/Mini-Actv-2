@@ -11,8 +11,8 @@ class Activity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_2)
-        val number = intent.getIntExtra("NUMBER_BYE", 1)
-        val byeValue = intent.getStringExtra("BYE_TEXT")
+        val number = intent.getIntExtra(NUMBER, 1)
+        val byeValue = intent.getStringExtra(TEXT)
         var result = ""
         if (byeValue != null) {
             result = byeValue.repeat(number)
@@ -20,7 +20,7 @@ class Activity2 : AppCompatActivity() {
         val button = findViewById<Button>(R.id.button)
         button.setOnClickListener {
             val resultIntent = Intent()
-            resultIntent.putExtra("RESULT", result)
+            resultIntent.putExtra(RESULT, result)
             setResult(RESULT_OK, resultIntent)
             finish()
         }
