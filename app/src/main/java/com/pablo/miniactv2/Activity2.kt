@@ -22,23 +22,27 @@ class Activity2 : AppCompatActivity() {
 
     private fun getResultFromIntent(): String {
         val number = intent.getIntExtra(NUMBER_KEY, DEFAULT_NUMBER)
-        val textValue = intent.getStringExtra(TEXT_KEY)
+        val textValue = intent.getStringExtra(MESSAGE_KEY)
         return textValue!!.repeat(number)
     }
 
     private fun setUpButton(result: String) {
         val button = findViewById<Button>(R.id.button)
         button.setOnClickListener {
-            val resultIntent = Intent()
-            resultIntent.putExtra(RESULT_KEY, result)
-            setResult(RESULT_OK, resultIntent)
-            finish()
+            createIntentAndFinish(result)
         }
     }
 
     private fun setUpTextView(result: String) {
         val textView = findViewById<TextView>(R.id.result)
         textView.text = result
+    }
+
+    private fun createIntentAndFinish(result: String) {
+        val resultIntent = Intent()
+        resultIntent.putExtra(RESULT_KEY, result)
+        setResult(RESULT_OK, resultIntent)
+        finish()
     }
 
 }

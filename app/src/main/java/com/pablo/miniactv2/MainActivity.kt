@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var messageInput: TextView
     private lateinit var numberInput: TextView
     private lateinit var binding: ActivityMainBinding
-    private val getContent = registerForActivityResult(StartActivityForResult()) {
+    private val onResultLauncher = registerForActivityResult(StartActivityForResult()) {
         if (it.resultCode == RESULT_OK)
             resultText.text = it.data!!.getStringExtra(RESULT_KEY).toString()
     }
@@ -39,22 +39,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpButton() {
         val gotoByeScreenButton = findViewById<Button>(R.id.button)
-        gotoByeScreenButton.setOnClickListener {
-            val integerValidator = IntNumberValidator(numberInput.text.toString())
-            val messageValidator = MessageValidator(messageInput.text.toString())
-            if (integerValidator.getData().isValid && messageValidator.getData().isValid)
-                startNewIntent()
-            else
-                printInputError(integerValidator, messageValidator)
-        }
+        gotoByeScreenButton.setOnClickListener { validateParametersAndLaunchIntent() }
+    }
+
+    private fun validateParametersAndLaunchIntent() {
+        val integerValidator = IntNumberValidator(numberInput.text.toString())
+        val messageValidator = MessageValidator(messageInput.text.toString())
+        if (integerValidator.getData().isValid && messageValidator.getData().isValid)
+            startNewIntent()
+        else
+            printInputError(integerValidator, messageValidator)
     }
 
     private fun startNewIntent() {
         val activity2 = Intent(this, Activity2::class.java)
-        activity2.putExtra(TEXT_KEY, messageInput.text.toString())
+        activity2.putExtra(MESSAGE_KEY, messageInput.text.toString())
         val number: Int = Integer.parseInt(numberInput.text.toString())
         activity2.putExtra(NUMBER_KEY, number)
-        getContent.launch(activity2)
+        onResultLauncher.launch(activity2)
     }
 
     private fun printInputError(
