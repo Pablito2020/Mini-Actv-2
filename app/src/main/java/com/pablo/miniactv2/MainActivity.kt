@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     val getContent = registerForActivityResult(StartActivityForResult()) {
         if (it.resultCode == RESULT_OK) {
-            val message = it.data?.getStringExtra(RESULT)
+            var message: String = it.data!!.getStringExtra(RESULT_KEY).toString()
             messageTextView.text = message
         }
     }
@@ -30,9 +30,9 @@ class MainActivity : AppCompatActivity() {
         messageTextView = findViewById(R.id.message)
         gotoByeScreenButton.setOnClickListener{
             val activity2 = Intent(this, Activity2::class.java)
-            activity2.putExtra(TEXT, textInputBye.getText().toString())
+            activity2.putExtra(TEXT_KEY, textInputBye.getText().toString())
             val number: Int = Integer.parseInt(numberInput.getText().toString())
-            activity2.putExtra(NUMBER, number)
+            activity2.putExtra(NUMBER_KEY, number)
             getContent.launch(activity2)
         }
     }
