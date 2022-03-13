@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun validateParametersAndLaunchIntent() {
         val integerValidator = IntNumberValidator(binding.editTextNumber.text.toString(), this)
-        val messageValidator = MessageValidator(binding.textInputEditText.text.toString(), this); if (integerValidator.getData().isValid && messageValidator.getData().isValid)
+        val messageValidator = MessageValidator(binding.textInputEditText.text.toString(), this)
+        if (integerValidator.getData().isValid && messageValidator.getData().isValid)
             startNewIntent()
         else
             printInputError(integerValidator, messageValidator)
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     private fun startNewIntent() {
         val activity2 = Intent(this, Activity2::class.java)
         activity2.putExtra(MESSAGE_KEY, binding.textInputEditText.text.toString())
-        val number: Int = Integer.parseInt(binding.editTextNumber.text.toString())
+        val number: Int = binding.editTextNumber.text.toString().toInt()
         activity2.putExtra(NUMBER_KEY, number)
         onResultLauncher.launch(activity2)
     }
