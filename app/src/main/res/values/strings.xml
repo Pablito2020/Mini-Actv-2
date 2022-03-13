@@ -7,4 +7,9 @@
     <string name="goto_bye">Go to Bye Screen</string>
     <string name="buttonBack">Go back</string>
     <string name="result">Default Result</string>
+    <string name="error_number_0">Number should be higher than 0</string>
+    <string name="error_number_empty">Number shouldn\'t be empty!</string>
+    <string name="error_message_empty">Message can\'t be empty!</string>
+    <string name="error_message_include_bye">Message should include bye!</string>
+    <string name="bye_keyword">bye</string>
 </resources>
