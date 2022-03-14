@@ -12,4 +12,5 @@
     <string name="error_message_empty">Message can\'t be empty!</string>
     <string name="error_message_include_bye">Message should include bye!</string>
     <string name="bye_keyword">bye</string>
+    <string name="numberHint">Example: 2</string>
 </resources>
