@@ -13,8 +13,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val onResultLauncher = registerForActivityResult(StartActivityForResult()) {
-        if (it.resultCode == RESULT_OK)
+        if (it.resultCode == RESULT_OK) {
             binding.message.text = it.data!!.getStringExtra(RESULT_KEY).toString()
+            binding.textInputEditText.text!!.clear()
+            binding.editTextNumber.text.clear()
+            binding.textInputEditText.requestFocus()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
